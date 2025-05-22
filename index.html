@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thème Numérologique Professionnel</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: #8b7355;
+        background: linear-gradient(
+          135deg,
+          #f7e7ce 0%,
+          #e8d5c4 30%,
+          #dfb2a4 70%,
+          #d4a574 100%
+        );
+        min-height: 100vh;
+        padding: 20px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Animation des étoiles */
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .star {
+        position: absolute;
+        color: #e8d5c4;
+        font-size: 12px;
+        animation: twinkle 3s infinite;
+        user-select: none;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scale(1) rotate(0deg);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(1.2) rotate(180deg);
+        }
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: linear-gradient(135deg, #fefcfb 0%, #fdf8f3 100%);
+        border-radius: 25px;
+        box-shadow: 0 20px 60px rgba(139, 115, 85, 0.15);
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #dfb2a4 0%, #e8d5c4 100%);
+        padding: 50px 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: rotate 20s linear infinite;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 3.5em;
+        font-weight: 700;
+        color: #fefcfb;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(139, 115, 85, 0.3);
+        position: relative;
+        z-index: 2;
+      }
+
+      .header .subtitle {
+        font-size: 1.3em;
+        color: #fefcfb;
+        font-weight: 300;
+        position: relative;
+        z-index: 2;
+        opacity: 0.9;
+      }
+
+      .input-section {
+        background: linear-gradient(135deg, #f7e7ce 0%, #fefcfb 100%);
+        padding: 40px;
+        border-bottom: 3px solid #e8d5c4;
+      }
+
+      .input-group {
+        margin-bottom: 25px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #8b7355;
+        font-size: 1.1em;
+      }
+
+      input {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #e8d5c4;
+        border-radius: 15px;
+        font-size: 16px;
+        background: #fefcfb;
+        color: #8b7355;
+        transition: all 0.3s ease;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #dfb2a4;
+        box-shadow: 0 0 20px rgba(223, 178, 164, 0.2);
+      }
+
+      .date-selectors {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .date-selectors select {
+        flex: 1;
+        min-width: 120px;
+        padding: 15px 20px;
+        border: 2px solid #e8d5c4;
+        border-radius: 15px;
+        font-size: 16px;
+        background: #fefcfb;
+        color: #8b7355;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .date-selectors select:focus {
+        outline: none;
+        border-color: #dfb2a4;
+        box-shadow: 0 0 20px rgba(223, 178, 164, 0.2);
+      }
+
+      .calculate-btn {
+        background: linear-gradient(135deg, #dfb2a4 0%, #d4a574 100%);
+        color: #fefcfb;
+        border: none;
+        padding: 18px 40px;
+        border-radius: 25px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        display: block;
+        margin: 30px auto 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+      }
+
+      .calculate-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(212, 165, 116, 0.4);
+      }
+
+      .content-section {
+        padding: 40px;
+        background: linear-gradient(135deg, #fefcfb 0%, #f7e7ce 100%);
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2.2em;
+        font-weight: 600;
+        color: #8b7355;
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "✨";
+        position: absolute;
+        right: -40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.8em;
+        animation: twinkle 2s infinite;
+      }
+
+      .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+      }
+
+      .result-card {
+        background: linear-gradient(135deg, #fefcfb 0%, #fdf8f3 100%);
+        border: 2px solid #e8d5c4;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+        transition: all 0.4s ease;
+        overflow: hidden;
+      }
+
+      .result-card::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #dfb2a4, #e8d5c4, #f7e7ce, #dfb2a4);
+        border-radius: 20px;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .result-card:hover::before {
+        opacity: 1;
+      }
+
+      .result-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(139, 115, 85, 0.15);
+      }
+
+      .result-number {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5em;
+        font-weight: 700;
+        margin: 0 auto 20px;
+        color: #fefcfb;
+        position: relative;
+      }
+
+      .regular-number {
+        background: linear-gradient(135deg, #dfb2a4 0%, #d4a574 100%);
+      }
+
+      .master-number {
+        background: linear-gradient(135deg, #c4a484 0%, #b8956f 100%);
+        animation: glow 2s infinite alternate;
+      }
+
+      @keyframes glow {
+        0% {
+          box-shadow: 0 0 20px rgba(196, 164, 132, 0.5);
+        }
+        100% {
+          box-shadow: 0 0 30px rgba(196, 164, 132, 0.8);
+        }
+      }
+
+      .result-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4em;
+        font-weight: 600;
+        color: #8b7355;
+        margin-bottom: 15px;
+      }
+
+      .calculation-detail {
+        font-size: 0.9em;
+        color: #a0876b;
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+
+      .interpretation-title {
+        color: #8b7355;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .result-description {
+        color: #8b7355;
+        line-height: 1.6;
+        text-align: justify;
+      }
+
+      .letters-analysis {
+        margin-bottom: 40px;
+      }
+
+      .letters-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: #fefcfb;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(139, 115, 85, 0.1);
+      }
+
+      .letters-table th {
+        background: linear-gradient(135deg, #dfb2a4 0%, #d4a574 100%);
+        color: #fefcfb;
+        padding: 15px;
+        font-weight: 600;
+      }
+
+      .letters-table td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #e8d5c4;
+      }
+
+      .vowel {
+        background: linear-gradient(135deg, #f7e7ce 0%, #fefcfb 100%);
+      }
+
+      .consonant {
+        background: linear-gradient(135deg, #fdf8f3 0%, #f7e7ce 100%);
+      }
+
+      .chart-container {
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .inclusion-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        max-width: 300px;
+        margin: 30px auto;
+      }
+
+      .inclusion-cell {
+        background: linear-gradient(135deg, #fefcfb 0%, #fdf8f3 100%);
+        border: 2px solid #e8d5c4;
+        padding: 20px;
+        text-align: center;
+        border-radius: 15px;
+        font-weight: 600;
+        color: #8b7355;
+        transition: all 0.3s ease;
+      }
+
+      .inclusion-cell:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(139, 115, 85, 0.2);
+      }
+
+      .missing-number {
+        background: linear-gradient(135deg, #f4d4d4 0%, #f1c2c2 100%);
+        color: #8b4b47;
+        border-color: #e8a8a8;
+      }
+
+      .present-number {
+        background: linear-gradient(135deg, #d4f4d4 0%, #c2f1c2 100%);
+        color: #4b8b47;
+        border-color: #a8e8a8;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          margin: 10px;
+          border-radius: 15px;
+        }
+
+        .header,
+        .input-section,
+        .content-section {
+          padding: 30px 20px;
+        }
+
+        .date-selectors {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .results-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .header h1 {
+          font-size: 2.5em;
+        }
+
+        .section-title::after {
+          right: -30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Étoiles animées -->
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+      <div class="header">
+        <h1>✨ Thème Numérologique ✨</h1>
+        <p class="subtitle">Révélation Professionnelle de votre Destinée</p>
+      </div>
+
+      <div class="input-section">
+        <div class="input-group">
+          <label for="fullName">🌟 Nom complet (nom et prénom)</label>
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Ex: Marie Claire Dubois"
+            oninput="updateCalculations()"
+          />
+        </div>
+        <div class="input-group">
+          <label for="birthDate">📅 Date de naissance</label>
+          <div class="date-selectors">
+            <select id="daySelect" onchange="updateCalculations()">
+              <option value="">Jour</option>
+            </select>
+            <select id="monthSelect" onchange="updateCalculations()">
+              <option value="">Mois</option>
+              <option value="1">Janvier</option>
+              <option value="2">Février</option>
+              <option value="3">Mars</option>
+              <option value="4">Avril</option>
+              <option value="5">Mai</option>
+              <option value="6">Juin</option>
+              <option value="7">Juillet</option>
+              <option value="8">Août</option>
+              <option value="9">Septembre</option>
+              <option value="10">Octobre</option>
+              <option value="11">Novembre</option>
+              <option value="12">Décembre</option>
+            </select>
+            <select id="yearSelect" onchange="updateCalculations()">
+              <option value="">Année</option>
+            </select>
+          </div>
+        </div>
+        <button class="calculate-btn" onclick="updateCalculations()">
+          ✨ Révéler votre Thème ✨
+        </button>
+      </div>
+
+      <div class="content-section">
+        <div id="lettersAnalysis" class="letters-analysis"></div>
+
+        <h2 class="section-title">Vos Nombres Sacrés</h2>
+        <div class="results-grid" id="results">
+          <!-- Les résultats seront générés ici -->
+        </div>
+
+        <div class="chart-container">
+          <h3 class="section-title" style="font-size: 1.8em">
+            Grille d'Inclusion
+          </h3>
+          <p style="color: #a0876b; margin-bottom: 20px">
+            Présence des énergies numériques (1-9) dans votre nom
+          </p>
+          <div class="inclusion-grid" id="inclusionGrid">
+            <!-- La grille sera générée ici -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Animation des étoiles
+      function createStars() {
+        const starsContainer = document.getElementById("stars");
+        const numberOfStars = 40;
+
+        for (let i = 0; i < numberOfStars; i++) {
+          const star = document.createElement("div");
+          star.className = "star";
+          star.innerHTML = Math.random() > 0.5 ? "✨" : "⭐";
+          star.style.left = Math.random() * 100 + "%";
+          star.style.top = Math.random() * 100 + "%";
+          star.style.animationDelay = Math.random() * 3 + "s";
+          star.style.animationDuration = Math.random() * 2 + 2 + "s";
+          starsContainer.appendChild(star);
+        }
+      }
+
+      // Tables de correspondance - MÊME LOGIQUE
+      const letterValues = {
+        A: 1,
+        B: 2,
+        C: 3,
+        D: 4,
+        E: 5,
+        F: 6,
+        G: 7,
+        H: 8,
+        I: 9,
+        J: 1,
+        K: 2,
+        L: 3,
+        M: 4,
+        N: 5,
+        O: 6,
+        P: 7,
+        Q: 8,
+        R: 9,
+        S: 1,
+        T: 2,
+        U: 3,
+        V: 4,
+        W: 5,
+        X: 6,
+        Y: 7,
+        Z: 8,
+      };
+
+      const vowels = ["A", "E", "I", "O", "U", "Y"];
+
+      const interpretations = {
+        1: {
+          title: "Le Leader ⭐",
+          description:
+            "Indépendance, leadership, innovation. Vous êtes un pionnier naturel avec une forte personnalité. Vous aimez diriger et initier de nouveaux projets. Votre défi est d'apprendre à collaborer tout en gardant votre autonomie.",
+        },
+        2: {
+          title: "Le Coopérateur 💫",
+          description:
+            "Coopération, diplomatie, sensibilité. Vous excellez dans les relations humaines et la médiation. Votre force réside dans votre capacité à unir les gens. Développez votre confiance en vous pour éviter l'indécision.",
+        },
+        3: {
+          title: "Le Créatif ✨",
+          description:
+            "Créativité, communication, optimisme. Vous avez un talent naturel pour l'expression artistique et la communication. Votre joie de vivre est contagieuse. Attention à ne pas vous disperser dans trop de projets.",
+        },
+        4: {
+          title: "Le Bâtisseur 🏗️",
+          description:
+            "Stabilité, méthode, persévérance. Vous êtes fiable et organisé, excellent pour concrétiser les projets. Votre approche méthodique vous mène au succès. Évitez la rigidité excessive.",
+        },
+        5: {
+          title: "L'Aventurier 🌍",
+          description:
+            "Liberté, changement, aventure. Vous avez soif d'expériences nouvelles et de liberté. Votre adaptabilité est remarquable. Apprenez à persévérer dans vos engagements importants.",
+        },
+        6: {
+          title: "Le Protecteur 💝",
+          description:
+            "Responsabilité, famille, service. Vous êtes naturellement porté vers l'aide aux autres et la création d'harmonie. Votre sens des responsabilités est exemplaire. Attention à ne pas vous oublier.",
+        },
+        7: {
+          title: "Le Sage 🔮",
+          description:
+            "Spiritualité, analyse, introspection. Vous cherchez la vérité profonde et avez une approche analytique de la vie. Votre intuition est développée. Partagez davantage vos découvertes.",
+        },
+        8: {
+          title: "L'Ambitieux 💎",
+          description:
+            "Ambition, matériel, autorité. Vous avez un sens naturel des affaires et de l'organisation. Le succès matériel vous attire. Équilibrez ambition et valeurs humaines.",
+        },
+        9: {
+          title: "L'Humaniste 🌟",
+          description:
+            "Générosité, sagesse, universalité. Vous êtes animé par des idéaux élevés et le désir d'aider l'humanité. Votre vision est large. Restez ancré dans le concret.",
+        },
+        11: {
+          title: "L'Inspiré ⚡ (Maître)",
+          description:
+            "Intuition, inspiration, révélation. Nombre maître porteur d'une mission spirituelle élevée. Vous avez des capacités intuitives exceptionnelles. Canalisez votre sensibilité vers un but constructif.",
+        },
+        22: {
+          title: "Le Maître Bâtisseur 🏛️ (Maître)",
+          description:
+            "Réalisation, construction, vision. Nombre maître capable de grandes réalisations concrètes. Vous pouvez transformer les rêves en réalité à grande échelle. Assumez votre pouvoir avec sagesse.",
+        },
+        33: {
+          title: "Le Maître Enseignant 📿 (Maître)",
+          description:
+            "Compassion, enseignement, guérison. Nombre maître dédié au service de l'humanité. Vous avez une capacité exceptionnelle à inspirer et guérir. Votre mission est d'élever les consciences.",
+        },
+      };
+
+      // MÊMES FONCTIONS - Logique identique
+      function reduceToSingleDigit(number, keepMaster = true) {
+        if (keepMaster && (number === 11 || number === 22 || number === 33)) {
+          return number;
+        }
+
+        while (number > 9) {
+          let sum = 0;
+          while (number > 0) {
+            sum += number % 10;
+            number = Math.floor(number / 10);
+          }
+          number = sum;
+          if (keepMaster && (number === 11 || number === 22 || number === 33)) {
+            return number;
+          }
+        }
+        return number;
+      }
+
+      function calculateNameValue(
+        name,
+        onlyVowels = false,
+        onlyConsonants = false
+      ) {
+        let sum = 0;
+        name = name.toUpperCase().replace(/[^A-Z]/g, "");
+
+        for (let char of name) {
+          if (letterValues[char]) {
+            if (onlyVowels && !vowels.includes(char)) continue;
+            if (onlyConsonants && vowels.includes(char)) continue;
+            sum += letterValues[char];
+          }
+        }
+        return sum;
+      }
+
+      function calculateLifePath() {
+        const day = parseInt(document.getElementById("daySelect").value);
+        const month = parseInt(document.getElementById("monthSelect").value);
+        const year = parseInt(document.getElementById("yearSelect").value);
+
+        if (!day || !month || !year) return 0;
+
+        return day + month + year;
+      }
+
+      function getSelectedDate() {
+        const day = parseInt(document.getElementById("daySelect").value);
+        const month = parseInt(document.getElementById("monthSelect").value);
+        const year = parseInt(document.getElementById("yearSelect").value);
+
+        if (!day || !month || !year) return null;
+
+        return { day, month, year };
+      }
+
+      function populateSelectors() {
+        // Remplir les jours (1-31)
+        const daySelect = document.getElementById("daySelect");
+        for (let i = 1; i <= 31; i++) {
+          const option = document.createElement("option");
+          option.value = i;
+          option.textContent = i;
+          daySelect.appendChild(option);
+        }
+
+        // Remplir les années (1900 à année actuelle + 10)
+        const yearSelect = document.getElementById("yearSelect");
+        const currentYear = new Date().getFullYear();
+        for (let i = currentYear + 10; i >= 1900; i--) {
+          const option = document.createElement("option");
+          option.value = i;
+          option.textContent = i;
+          yearSelect.appendChild(option);
+        }
+      }
+
+      function createLettersAnalysisTable(name) {
+        if (!name) return "";
+
+        name = name.toUpperCase().replace(/[^A-Z]/g, "");
+        let html =
+          '<h3 class="section-title" style="font-size: 1.8em;">Analyse des Lettres</h3>';
+        html += '<table class="letters-table">';
+        html += "<tr><th>Lettre</th><th>Valeur</th><th>Type</th></tr>";
+
+        for (let char of name) {
+          if (letterValues[char]) {
+            const isVowel = vowels.includes(char);
+            html += `<tr class="${isVowel ? "vowel" : "consonant"}">`;
+            html += `<td><strong>${char}</strong></td>`;
+            html += `<td><strong>${letterValues[char]}</strong></td>`;
+            html += `<td>${isVowel ? "🎵 Voyelle" : "🔤 Consonne"}</td>`;
+            html += "</tr>";
+          }
+        }
+        html += "</table>";
+        return html;
+      }
+
+      function createInclusionGrid(name) {
+        if (!name) return;
+
+        name = name.toUpperCase().replace(/[^A-Z]/g, "");
+        const counts = {};
+
+        // Initialiser les comptes
+        for (let i = 1; i <= 9; i++) {
+          counts[i] = 0;
+        }
+
+        // Compter les occurrences
+        for (let char of name) {
+          if (letterValues[char]) {
+            counts[letterValues[char]]++;
+          }
+        }
+
+        const grid = document.getElementById("inclusionGrid");
+        grid.innerHTML = "";
+
+        for (let i = 1; i <= 9; i++) {
+          const cell = document.createElement("div");
+          cell.className = "inclusion-cell";
+
+          if (counts[i] === 0) {
+            cell.classList.add("missing-number");
+            cell.innerHTML = `<strong>${i}</strong><br><small>Absent</small>`;
+          } else {
+            cell.classList.add("present-number");
+            cell.innerHTML = `<strong>${i}</strong><br><small>${counts[i]}x</small>`;
+          }
+
+          grid.appendChild(cell);
+        }
+      }
+
+      function updateCalculations() {
+        const fullName = document.getElementById("fullName").value;
+        const dateInfo = getSelectedDate();
+
+        if (!fullName && !dateInfo) {
+          document.getElementById("results").innerHTML = "";
+          document.getElementById("lettersAnalysis").innerHTML = "";
+          document.getElementById("inclusionGrid").innerHTML = "";
+          return;
+        }
+
+        // Analyse des lettres
+        document.getElementById("lettersAnalysis").innerHTML =
+          createLettersAnalysisTable(fullName);
+
+        // Grille d'inclusion
+        createInclusionGrid(fullName);
+
+        const results = [];
+
+        if (fullName) {
+          // Nombre d'Expression
+          const expressionSum = calculateNameValue(fullName);
+          const expressionNumber = reduceToSingleDigit(expressionSum);
+          results.push({
+            title: "Nombre d'Expression",
+            number: expressionNumber,
+            calculation: `${fullName.toUpperCase()} = ${expressionSum} → ${expressionNumber}`,
+            interpretation: interpretations[expressionNumber],
+          });
+
+          // Nombre Intime (voyelles)
+          const intimateSum = calculateNameValue(fullName, true);
+          const intimateNumber = reduceToSingleDigit(intimateSum);
+          results.push({
+            title: "Nombre Intime",
+            number: intimateNumber,
+            calculation: `Voyelles = ${intimateSum} → ${intimateNumber}`,
+            interpretation: interpretations[intimateNumber],
+          });
+
+          // Nombre de Réalisation (consonnes)
+          const realizationSum = calculateNameValue(fullName, false, true);
+          const realizationNumber = reduceToSingleDigit(realizationSum);
+          results.push({
+            title: "Nombre de Réalisation",
+            number: realizationNumber,
+            calculation: `Consonnes = ${realizationSum} → ${realizationNumber}`,
+            interpretation: interpretations[realizationNumber],
+          });
+        }
+
+        if (dateInfo) {
+          // Chemin de Vie
+          const lifePathSum = calculateLifePath();
+          const lifePathNumber = reduceToSingleDigit(lifePathSum);
+          results.push({
+            title: "Chemin de Vie",
+            number: lifePathNumber,
+            calculation: `${dateInfo.day}+${dateInfo.month}+${dateInfo.year} = ${lifePathSum} → ${lifePathNumber}`,
+            interpretation: interpretations[lifePathNumber],
+          });
+
+          // Nombre Personnel (jour de naissance)
+          const personalNumber = reduceToSingleDigit(dateInfo.day);
+          results.push({
+            title: "Nombre Personnel",
+            number: personalNumber,
+            calculation: `Jour ${dateInfo.day} → ${personalNumber}`,
+            interpretation: interpretations[personalNumber],
+          });
+        }
+
+        // Afficher les résultats - MÊME LOGIQUE avec nouveau design
+        const resultsContainer = document.getElementById("results");
+        resultsContainer.innerHTML = "";
+
+        results.forEach((result) => {
+          const card = document.createElement("div");
+          card.className = "result-card";
+
+          const isMaster =
+            result.number === 11 ||
+            result.number === 22 ||
+            result.number === 33;
+
+          card.innerHTML = `
+                    <div class="result-number ${
+                      isMaster ? "master-number" : "regular-number"
+                    }">
+                        ${result.number}
+                    </div>
+                    <div class="result-title">${result.title}</div>
+                    <div class="calculation-detail">
+                        ${result.calculation}
+                    </div>
+                    <h4 class="interpretation-title">${
+                      result.interpretation.title
+                    }</h4>
+                    <div class="result-description">${
+                      result.interpretation.description
+                    }</div>
+                `;
+
+          resultsContainer.appendChild(card);
+        });
+      }
+
+      // Initialisation - MÊME LOGIQUE
+      document.addEventListener("DOMContentLoaded", function () {
+        createStars();
+        populateSelectors();
+        updateCalculations();
+      });
+    </script>
+  </body>
+</html>
